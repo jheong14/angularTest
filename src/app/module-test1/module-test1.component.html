@@ -1,0 +1,73 @@
+<style>
+  .example-radio-group {
+    display: flex;
+    flex-direction: column; /* 줄바꿈 해줌 */
+    margin: 15px 0;
+  }
+
+  .example-radio-button {
+    margin: 5px;
+  }
+
+</style>
+
+<p>module-test1 works!</p>
+<mat-radio-group class="example-radio-group" [(ngModel)] = 'radioVal'>
+  <mat-radio-button class="example-radio-button" *ngFor="let pList0 of paramList2" [value]="pList0.value">{{pList0.name}}</mat-radio-button>
+</mat-radio-group>
+<br>
+<mat-form-field>
+  <input matInput type="text" placeholder="insert word" [(ngModel)]="inputVal"/>
+</mat-form-field>
+
+<!-- then 혹은 else 에 true 혹은 false 값이 들어 갈시 인식을 못하고 에러가 출력됨. -->
+<h4 *ngIf="inputVal.indexOf('-') > -1; then thenVal; else elseVal">insert word is {{inputVal}}</h4>
+
+<ng-template #thenVal>
+  <h1>{{inputVal}} is in seperate</h1>
+</ng-template>
+
+<ng-template #elseVal>
+  <h2>{{inputVal}} is not in seperate</h2>
+</ng-template>
+
+
+<br>
+<mat-form-field>
+  <input matInput type="text" placeholder="insert word" [(ngModel)]="inputVal1"/>
+</mat-form-field>
+
+<!--
+  ngIf 조건 뒤에 then else 를 사용해서 조건값이 true 일경우 #thenResult template이 출력되고, 아닌경우 #otherResult의 template이 출력된다.
+  이 경우, ngIf 조건이 붙여진 p태그 안의 text 내용은 무시된다.
+-->
+<h4 *ngIf="inputVal1 == '0900099'; then thenVal_1; else elseVal_2">여기에는 뭘 써도 무시됨 개 이상함. {{inputVal1}}</h4>
+
+<ng-template #thenVal_1>
+  <h1>{{inputVal1}} is 0900099</h1>
+</ng-template>
+
+<ng-template #elseVal_2>
+  <h2>{{inputVal1}} is not 0900099</h2>
+</ng-template>
+
+
+<br>
+<mat-form-field>
+  <input matInput type="text" placeholder="입력하세요.." [(ngModel)]="switchVal">
+</mat-form-field>
+
+<!-- *ng 에는 놀랍게도 else if 가 없다 노오오오오오오올라워라  -->
+<div [ngSwitch]='switchVal'>
+  <h1 *ngSwitchCase="'1'">{{switchVal}}은 h1태그이다.</h1>
+  <h2 *ngSwitchCase="'2'">{{switchVal}}은 h2태그이다.</h2>
+  <h3 *ngSwitchCase="'3'">{{switchVal}}은 h3태그이다.</h3>
+  <!--<h4 *ngSwitchDefault>{{switchVal}}을 맞추시오</h4>-->
+  <h1 *ngIf="switchVal == ''; then isNnull; else notNull"></h1>
+  <ng-template #isNnull>
+    <h1>input value is null</h1>
+  </ng-template>
+  <ng-template #notNull>
+    <h1>{{switchVal}}는 스위치에 들어간 값이 아님.</h1>
+  </ng-template>
+</div>

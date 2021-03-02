@@ -1,0 +1,49 @@
+<style>
+  .matInput{
+    width: 600px;
+    border-color: cornsilk;
+  }
+</style>
+
+<h3>두껍고 초록색</h3>
+
+<mat-card>
+  <mat-card-content>
+    <h2></h2>
+    <section>
+      <mat-radio-group [(ngModel)]='color' name="samp_rad">
+        <mat-radio-button value="primary">Primary</mat-radio-button><br>
+        <mat-radio-button value="accent">Accent</mat-radio-button><br>
+        <mat-radio-button value="warn">Warn</mat-radio-button>
+      </mat-radio-group>
+    </section>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-content>
+    <h2>Result</h2>
+    <mat-progress-spinner [color]="color" [value]="value"></mat-progress-spinner>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-content>
+    <mat-radio-group name="radList" [(ngModel)]="checked">
+      <mat-radio-button *ngFor="let op of list" [value]="op.name" name="radList">{{op.name}}</mat-radio-button>
+    </mat-radio-group>
+  </mat-card-content>
+</mat-card>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<!--<input class="matInput" />-->
+<div>
+  <mat-form-field>
+    <input class = 'matInput' matInput placeholder="Input" [(ngModel)]='result' (keyup)="onKeyUp($event)">
+  </mat-form-field>
+</div>
+
+<p>{{result}}</p>
